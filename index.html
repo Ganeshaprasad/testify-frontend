@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Display</title>
+    <title>Professional Blog Display</title>
     <link rel="stylesheet" href="style.css">
     <script type="module">
         // Import Firebase functions
@@ -36,7 +36,13 @@
                     const post = doc.data();
                     const postElement = document.createElement('div');
                     postElement.className = 'post';
-                    postElement.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+                    postElement.innerHTML = `
+                        <img src="${post.imageUrl}" alt="${post.title}" class="post-image">
+                        <div class="post-content">
+                            <h3>${post.title}</h3>
+                            <p>${post.content}</p>
+                            <p class="post-date">Posted on: ${new Date(post.timestamp).toLocaleString()}</p>
+                        </div>`;
                     postsContainer.appendChild(postElement);
                 });
             } catch (error) {
@@ -44,19 +50,54 @@
             }
         });
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .post {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .post-content {
+            padding: 20px;
+        }
+        .post h3 {
+            margin-top: 0;
+        }
+        .post-date {
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>My Blog</h1>
+        <h1>My Professional Blog</h1>
     </header>
 
     <main>
-        <h2>Blog Posts</h2>
+        <h2>Latest Blog Posts</h2>
         <div id="posts"></div>
     </main>
 
     <footer>
-        <p>&copy; 2024 My Blog. All rights reserved.</p>
+        <p>&copy; 2024 My Professional Blog. All rights reserved.</p>
     </footer>
 </body>
 </html>
